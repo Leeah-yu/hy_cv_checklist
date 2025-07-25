@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>과세자료 제출 셀프 체크리스트</title>
+ <style>
+   
+.logo-header {
+  text-align: center;
+  padding: 0px 0 8px;
+}
+
+.logo-crop {
+  display: inline-block;
+  height: 100px;         /* 보여주고 싶은 영역 높이 (실험적 조정) */
+  overflow: hidden;
+  line-height: 0;       /* 아래 여백 제거 */
+}
+
+.logo-crop img {
+  max-height: 150px;
+  width: auto;
+  display: block;
+  object-fit: cover;
+  object-position: top;
+}
+
+#startForm p {
+  line-height: 1.8;
+}
+
+
+body {
+  font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  margin: 0;
+  padding: 40px 20px;
+}
+
+h2, h3 {
+  color: #333;
+  font-weight: 600;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 15px;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+
+#startForm, #mainForm, #resultContainer {
+  max-width: 500px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 32px;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  margin-bottom: 20px;
+}
+
+#resultContainer:empty {
+  display: none;
+}
+
+
+input[type="text"] {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 14px;
+  margin-top: 8px;
+  margin-bottom: 24px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #0b0b25;
+  border: none;
+  color: white;
+  padding: 14px 20px;
+  margin-top: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #0b0b25;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.button-container button {
+  background-color: #1a1a40;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.button-container button:hover {
+  background-color: #333366;
+}
+
+/* 라디오 버튼이 안 보이는 문제 해결용 */
+input[type="radio"] {
+  accent-color: #0b0b25;
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+}
+
+
+input[type="radio"] + label {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 8px 10px 8px 0;
+  border: 2px solid #ddd;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-size: 14px;
+}
+
+input[type="radio"]:checked + label {
+  border-color: #0b0b25;
+  background-color: #e6faf4;
+  color: #0b0b25;
+  font-weight: 500;
+}
+
+div > div {
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+ul li::before {
+  content: "✔️ ";
+  margin-right: 8px;
+  color: #0b0b25;
+}
+
+.info-box {
+  background-color: #f1f3f5;
+  border-left: 5px solid #0b0b25;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  margin-top: 12px;
+  color: #333;
+  line-height: 1.6;
+}
+
+.info-box a {
+  color: #0b0b25;
+  text-decoration: underline;
+}
+
+.sub-desc {
+  font-size: 13px; /* 더 작게 */
+  color: #3a5f9a;  /* 점잖은 블루 계열 (#3a5f9a 또는 #506ea9 추천) */
+  margin-top: 4px;
+  line-height: 1.6;
+}
+
+.hint-blue {
+  font-size: 13px;
+  color: #3a5f9a;  /* 점잖은 블루 */
+  font-weight: 400;
+}
+
+
+
+  </style>
+</head>
+<body>
+
+  <header class="logo-header">
+    <div class="logo-crop">
+    <img src="https://www.thehanyoung.com/img/sub/vision_img01.png" alt="관세법인 한영 로고">
+    </div>
+  </header>
+
+<h2> 과세자료 제출 셀프 체크리스트</h2>
+
+<div id="startForm">
+  <div>
+    <p>
+    안녕하세요 관세법인 한영입니다.<br>
+     <strong><u>2025년 9월 1일</u></strong>부터 수입통관 시 과세자료 제출이 의무화됩니다.<br>
+    본 체크리스트를 통해 귀사가 제출 대상에 해당하는지, <br>어떤 자료를 준비해야 하는지 간편하게 확인해보세요.<br> </p>
+    <br>
+    <strong>업체명을 입력해 주세요:</strong><br>
+    <input type="text" id="companyName" required placeholder="예: 관세법인 한영">
+  </div>
+  <button onclick="showChecklist()">다음</button>
+</div>
+
+<div id="mainForm" style="display:none;">
+  <form id="checklistForm">
+    <div id="section1">
+    <div>
+      1.1 AEO 공인 기업입니까? <span class="hint-blue">(수출입 안전관리 우수 공인업체)</span><br>
+      <input type="radio" name="q1_1" value="1"> 예
+      <input type="radio" name="q1_1" value="0"> 아니오
+    </div>
+    <div>
+      1.2 ACVA 승인 기업입니까? <span class="hint-blue">(특수관계자 과세가격 결정방법 사전심사)</span><br>
+      <input type="radio" name="q1_2" value="1"> 예
+      <input type="radio" name="q1_2" value="0"> 아니오
+    </div>
+    <div>
+      1.3 <strong><u>전년도</u></strong> 납세실적이 5억원 이하입니까? <span class="hint-blue">(관세, 부가세, 개별소비세 등 합산세액)</span><br>
+      <input type="radio" name="q1_3" value="1"> 예
+      <input type="radio" name="q1_3" value="0"> 아니오
+            <div class="info-box">
+            💡 <strong>연간 납세실적 확인 방법:</strong><br>
+            유니패스(<a href="https://unipass.customs.go.kr" target="_blank">https://unipass.customs.go.kr</a>) 로그인 →  
+            [정보조회] → [자사실적] → [수출입·환급·납세실적] (1년) 조회→ ‘제세납부실적’ 확인
+            </div>
+
+      </div>
+      <button type="button" onclick="handleInitialCheck()">다음</button>
+    </div>
+
+    <div id="section2" style="display:none;">
+      <h4>귀사는 과세자료 제출 대상입니다. 아래 항목에 답변해주세요.</h4>
+      <div>2. 수입물품과 관련하여 로열티 계약을 체결하고 별도로 지급하는 금액이 있습니까?<br>
+        <input type="radio" name="q21" value="1"> 예
+        <input type="radio" name="q21" value="0"> 아니오</div>
+      <div>3. 해외공장 등에 생산 관련 원부자재나 용역 등을 무상 또는 할인된 가격으로 제공하고 있습니까?<br>
+        <input type="radio" name="q22" value="1"> 예
+        <input type="radio" name="q22" value="0"> 아니오</div>
+      <div>4. 수입물품과 관련하여 별도의 수수료, 중개료 등을 지급하고 있습니까?<br>
+        <input type="radio" name="q23" value="1"> 예
+        <input type="radio" name="q23" value="0"> 아니오</div>
+      <div>5. 수입과정에서 수입대금과 별도로 지급하는 운임관련 비용이 있습니까?<br>
+        <input type="radio" name="q24" value="1"> 예
+        <input type="radio" name="q24" value="0"> 아니오</div>
+      <div>6. 해외포장용역 및 용기 임대 관련하여 별도로 지급하는 비용이 있습니까?<br>
+        <input type="radio" name="q25" value="1"> 예
+        <input type="radio" name="q25" value="0"> 아니오</div>
+      <div>7. 수입물품 대금과 별개로, 수입물품을 판매하여 얻은 수익금 중 사후에 판매자에게 지급하는 금액이 있습니까?<br>
+        <input type="radio" name="q26" value="1"> 예
+        <input type="radio" name="q26" value="0"> 아니오</div>
+      <div>8. 수입물품 대금을 제외하고, 판매자나 제3자에게 간접적으로 지급하는 금액이 있습니까?<br> 
+        <span class="hint-blue">*수입물품의 대가와 판매자의 채무를 상계하거나, 판매자의 채무를 제3자에게 변제해주는 경우를 포함합니다.</span><br>
+        <input type="radio" name="q27" value="1"> 예
+        <input type="radio" name="q27" value="0"> 아니오</div>
+      <div>9. 해외거래처와 본·지사 관계에 있는 등 특수관계에 해당됩니까?<br>
+        <input type="radio" name="q28" value="1"> 예
+        <input type="radio" name="q28" value="0"> 아니오</div>
+
+      <button type="button" onclick="calculateFinalResult()">최종 결과 보기</button>
+    </div>
+  </form>
+</div>
+
+<div id="resultContainer"></div>
+
+<script>
+let finalResultText = "";
+
+function showChecklist() {
+  const company = document.getElementById("companyName").value.trim();
+  if (!company) {
+    alert("업체명을 입력해주세요.");
+    return;
+  }
+  document.getElementById("startForm").style.display = "none";
+  document.getElementById("mainForm").style.display = "block";
+}
+
+function handleInitialCheck() {
+  const company = document.getElementById("companyName").value.trim();
+  const firstCheck = ["q1_1", "q1_2", "q1_3"].some(q => document.querySelector(`input[name='${q}']:checked`)?.value === "1");
+  if (firstCheck) {
+    finalResultText = `업체명: ${company}\n\n귀사는 과세자료 제출 대상이 아닙니다.`;
+    let html = `<h3>업체명: ${company}</h3>`;
+    html += `<h3>귀사는 과세자료 제출 대상이 아닙니다.</h3>`;
+    html += `
+    <div class="button-container">
+        <button onclick="location.reload()">다시 시작</button>
+        <button onclick="sendResultByEmail('${company}')">결과 메일보내기</button>
+    </div>
+    `;
+    document.getElementById("mainForm").style.display = "none";
+    document.getElementById("resultContainer").innerHTML = html;
+  } else {
+    document.getElementById("section1").style.display = "none";
+    document.getElementById("section2").style.display = "block";
+  }
+}
+
+function calculateFinalResult() {
+  const company = document.getElementById("companyName").value.trim();
+  const labels = [
+    "로열티", "생산지원비", "수수료 중개료", "운임 보험료",
+    "용기 포장비용", "사후귀속이익", "간접지급금액", "특수관계자 거래"
+  ];
+
+  const selected = labels.map((label, i) => {
+    const answer = document.querySelector(`input[name='q2${i+1}']:checked`);
+    if (!answer) {
+      alert("모든 항목에 체크하셔야 합니다.");
+      throw new Error("항목 미체크");
+    }
+    return {
+      label,
+      checked: answer.value === "1"
+    };
+  });
+
+  // ✅ 질문 순서대로 웹 출력용 리스트 (li 태그용)
+  const displayList = selected.map(x =>
+    x.checked
+      ? `${x.label} 관련 과세가격 결정자료`
+      : `${x.label} 미해당 사유서`
+  );
+
+  // ✅ 질문 순서대로 메일용 리스트 (텍스트용, '-' 포함)
+  const mailList = selected.map(x =>
+    x.checked
+      ? `- ${x.label} 관련 과세가격 결정자료`
+      : `- ${x.label} 미해당 사유서`
+  );
+
+  // ✅ 메일용 텍스트 (finalResultText)
+  finalResultText =
+    `업체명: ${company}\n\n` +
+    `귀사가 제출해야 할 과세가격 결정자료는 다음과 같습니다.\n` +
+    `- 송품장\n` +
+    `- 수입물품 구매계약서\n` +
+    mailList.join("\n");
+
+  // ✅ 화면 표시용 HTML (li에만 displayList 사용)
+  let html = `<h3>업체명: ${company}</h3>`;
+  html += `<h3>2025년 9월 1일부터<br> 귀사가 제출해야 할 과세가격 결정자료는 다음과 같습니다.</h3><ul>`;
+  html += `<p>*과세가격 결정자료는 '해외거래처', '거래구조'별로 구분하여 제출해야합니다.</p>`;
+  html += "<li>송품장</li><li>수입물품 구매계약서</li>";
+  displayList.forEach(item => html += `<li>${item}</li>`);
+  html += "</ul>";
+  html += `<p style="line-height: 1.5;">무엇을 어떻게 제출해야 할지 막막하신가요?<br>한영은 기업별 거래 구조와 잠재 리스크를 분석하여, <br>과세자료 제출을 보다 정확하고 체계적으로 지원해드립니다.<br>
+전문가의 도움이 필요하시다면, 지금 한영에 결과를 공유해 주세요.</p>`;
+  html += `
+    <div class="button-container">
+      <button onclick="location.reload()">다시 시작</button>
+      <button onclick="sendResultByEmail('${company}')">결과 메일보내기</button>
+    </div>
+  `;
+
+  document.getElementById("mainForm").style.display = "none";
+  document.getElementById("resultContainer").innerHTML = html;
+}
+
+
+function sendResultByEmail(company) {
+  const subject = encodeURIComponent(`[과세자료 체크리스트 결과] ${company}`);
+  const body = encodeURIComponent(finalResultText);
+  const mailto = `mailto:consulting@thehanyoung.com?subject=${subject}&body=${body}`;
+  window.location.href = mailto;
+}
+</script>
+
+</body>
+</html>
