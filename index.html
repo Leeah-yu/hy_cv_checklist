@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>과세자료 제출 셀프 체크리스트</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
  <style>
    
 .logo-header {
@@ -149,11 +151,18 @@ ul {
   padding-left: 0;
 }
 
+ul li {
+  font-size: 15px;
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
 ul li::before {
   content: "✔️ ";
   margin-right: 8px;
   color: #0b0b25;
 }
+
 
 .info-box {
   background-color: #f1f3f5;
@@ -184,6 +193,38 @@ ul li::before {
   font-weight: 400;
 }
 
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+    padding: 20px 12px;
+  }
+
+  #startForm, #mainForm, #resultContainer {
+    padding: 24px 20px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .button-container button {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  ul li {
+    font-size: 14px;
+  }
+
+  .info-box {
+    font-size: 13px;
+    padding: 10px 14px;
+  }
+
+  .sub-desc, .hint-blue {
+    font-size: 12px;
+  }
+}
 
 
   </style>
