@@ -193,6 +193,8 @@ ul li::before {
   font-weight: 400;
 }
 
+
+
 @media (max-width: 480px) {
   body {
     font-size: 14px;
@@ -248,6 +250,9 @@ ul li::before {
     <br>
     <strong>업체명을 입력해 주세요:</strong><br>
     <input type="text" id="companyName" required placeholder="예: 관세법인 한영">
+    <strong>담당자 연락처를 입력해 주세요:</strong><br>
+    <input type="text" id="phoneNumber" required placeholder="예: 010-1234-5678"><br><br>
+
   </div>
   <button onclick="showChecklist()">다음</button>
 </div>
@@ -319,8 +324,14 @@ let finalResultText = "";
 
 function showChecklist() {
   const company = document.getElementById("companyName").value.trim();
+  const phone = document.getElementById("phoneNumber").value.trim(); // 전화번호 가져오기
+
   if (!company) {
     alert("업체명을 입력해주세요.");
+    return;
+  }
+    if (!phone) {
+    alert("담당자 연락처를 입력해주세요.");
     return;
   }
   document.getElementById("startForm").style.display = "none";
@@ -350,6 +361,7 @@ function handleInitialCheck() {
 
 function calculateFinalResult() {
   const company = document.getElementById("companyName").value.trim();
+  const phone = document.getElementById("phoneNumber").value.trim();
   const labels = [
     "로열티", "생산지원비", "수수료 중개료", "운임 보험료",
     "용기 포장비용", "사후귀속이익", "간접지급금액", "특수관계자 거래"
@@ -384,13 +396,15 @@ function calculateFinalResult() {
   // ✅ 메일용 텍스트 (finalResultText)
   finalResultText =
     `업체명: ${company}\n\n` +
+    `담당자 연락처: ${phone}\n\n` +
     `귀사가 제출해야 할 과세가격 결정자료는 다음과 같습니다.\n` +
     `- 송품장\n` +
     `- 수입물품 구매계약서\n` +
     mailList.join("\n");
 
   // ✅ 화면 표시용 HTML (li에만 displayList 사용)
-  let html = `<h3>업체명: ${company}</h3>`;
+  let html = `<h4>업체명: ${company}</h4>`;
+  html += `<h4>담당자 연락처: ${phone}</h4>`;
   html += `<h3>2025년 9월 1일부터<br> 귀사가 제출해야 할 과세가격 결정자료는 다음과 같습니다.</h3><ul>`;
   html += `<p>*과세가격 결정자료는 '해외거래처', '거래구조'별로 구분하여 제출해야합니다.</p>`;
   html += "<li>송품장</li><li>수입물품 구매계약서</li>";
